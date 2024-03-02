@@ -13,6 +13,8 @@ class ProductoController extends Controller
     public function index()
     {
         //
+        $productos = Producto::all();
+        return view('productos/productoIndex', compact('productos'));
     }
 
     /**
@@ -21,6 +23,7 @@ class ProductoController extends Controller
     public function create()
     {
         //
+        return view('productos.productoCreate');
     }
 
     /**
@@ -29,6 +32,30 @@ class ProductoController extends Controller
     public function store(Request $request)
     {
         //
+        //Validacion
+        $request -> validate([
+            'nombre_producto' => 'required|max:255',
+            'marca' => 'required',
+            'descripcion' => ['required', 'min:10'],
+            'precio' => ['required', 'decimal:0, 2' ],
+            'categoria' => 'required',
+            'deporte' => 'required',
+
+
+        ]);
+    
+        //Guardar
+        $producto = new Producto();
+        $producto -> nombre_producto = $request -> nombre_producto;
+        $producto -> marca = $request -> marca;
+        $producto -> descripcion = $request -> descripcion;
+        $producto -> precio = $request -> precio;
+        $producto -> categoria = $request -> categoria;
+        $producto -> deporte = $request -> deporte;
+        $producto -> save();
+    
+        //Redireccionar
+        return redirect()->route('producto.index');
     }
 
     /**
