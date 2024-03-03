@@ -11,35 +11,72 @@
 <!-- Fromulario de edicion de comentario -->
     <a href="{{ route('producto.index') }}">Lista de Producto</a>
     <hr>
-    <h1>Editar Comentario</h1>
+    <h1>Editar Producto</h1>
 
     @include('parciales.form-error')
 
-    <form action="{{ route('comentario.update', $comentario) }}" method ="POST" >
+    <form action="{{ route('producto.update', $producto) }}" method ="POST" >
         @csrf
         @method('PATCH')
         <div class="container">
-      
-          <label for="nombre"><b>Nombre</b></label>
-          <input type="text" placeholder="Ingrese su nombre" name="nombre" value= "{{ old('nombre') ?? $comentario -> nombre}}" id="nombre">
           <hr>
-      
-          <label for="correo"><b>Correo</b></label>
-          <input type="text" placeholder="Ingrese su correo" name="correo" value= "{{ old('correo') ?? $comentario -> correo}}" id="correo" >
           <hr>
+          <label for="nombre_producto"><b>Nombre</b></label>
+          <input type="text" placeholder="Ingrese el nombre del producto" name="nombre_producto" value=" {{ old('nombre_producto') ?? $producto -> nombre_producto}}" required>
+          @error('nombre_producto')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+          <br>
+          <br>
 
-          <label for="ciudad"><b>Ciudad</b></label>
-          <select name="ciudad">
-            <option value="guadalajara" @selected($comentario -> ciudad == 'guadalajara') >Guadalajara</option>
-            <option value="monterrey" @selected($comentario -> ciudad == 'monterrey') >MTY</option>
+          
+          <label for="marca"><b>Marca</b></label>
+          <select name="marca">
+            <option value="nike" @selected($producto -> marca == 'nike') >Nike</option>
+            <option value="adidas" @selected($producto -> marca == 'adidas') >Adidas</option>
+            <option value="puma" @selected($producto -> marca == 'puma') >Puma</option>  
+            <option value="newbalance" @selected($producto -> marca == 'newbalance') >NewBalance</option>  
+            <option value="umbro" @selected($producto -> marca == 'umbro') >Umbro</option>  
+            <option value="charly" @selected($producto -> marca == 'charly') >Charly</option>  
+            <option value="otra" @selected($producto -> marca == 'otra') >Otra</option>  
+        </select>
+          <br>
+          <br>
+      
+          <label><b>Descripción</b></label>
+          <br>
+          <textarea rows="3" placeholder="Descripción del producto"  name="descripcion" cols="30" rows="3" value=" {{ old('descripcion') ?? $producto -> descripcion}}" ></textarea>
+          <br>
+          <br>
+
+          <label for="precio"><b>Precio</b></label>
+          <input type="number"  step="any" placeholder="Ingrese el precio" name="precio" min ="0" value=" {{ old('precio') ?? $producto -> precio}}" >
+          @error('precio')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
+          <br>
+          <br>
+
+          <label for="categoria"><b>Categoria</b></label>
+          <select name="categoria">
+            <option value="ropa" @selected($producto -> categoria == 'ropa') >Ropa</option>
+            <option value="calzado" @selected($producto -> categoria == 'calzado') > Calzado</option>
+            <option value="accesorio" @selected($producto -> categoria == 'accesorio')> Accesorio</option>  
           </select>
           <br>
-
-          <label><b>Comentario</b></label>
-          <textarea rows="6" placeholder="Tu mensaje" id="comentario" name="comentario" value= "{{ old('comentario') ?? $comentario -> comentario}}" required ></textarea>
           <br>
+
+          <label for="deporte"><b>Categoria</b></label>
+          <select name="deporte">
+            <option value="futbol" @selected($producto -> deporte == 'futbol') >Futbol</option>
+            <option value="baloncesto" @selected($producto -> deporte == 'baloncesto') >Basketball</option>
+            <option value="voleibol" @selected($producto -> deporte == 'voleibol') > Volleyball</option>  
+          </select>
+          <br>
+          <br>
+
       
-          <button type="submit" class="registerbtn">Enviar</button>
+          <button type="submit" class="registerbtn">Registrar</button>
         </div>
     </form>
     <br><br>
