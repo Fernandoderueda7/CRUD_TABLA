@@ -22,7 +22,7 @@
           <hr>
           <hr>
           <label for="nombre_producto"><b>Nombre</b></label>
-          <input type="text" placeholder="Ingrese el nombre del producto" name="nombre_producto" value=" {{ old('nombre_producto') ?? $producto -> nombre_producto}}" required>
+          <input type="text" placeholder="Ingrese el nombre del producto" name="nombre_producto" value=" {{ old('nombre_producto') ?? $producto -> nombre_producto}}">
           @error('nombre_producto')
               <div class="alert alert-danger">{{ $message }}</div>
           @enderror
@@ -45,7 +45,10 @@
       
           <label><b>Descripción</b></label>
           <br>
-          <textarea rows="3" placeholder="Descripción del producto"  name="descripcion" cols="30" rows="3" value=" {{ old('descripcion') ?? $producto -> descripcion}}" ></textarea>
+          <textarea placeholder="Descripción del producto"  name="descripcion" cols="40" rows="5" value=" {{ old('descripcion') ?? $producto -> descripcion}}" ></textarea>
+          @error('descripcion')
+              <div class="alert alert-danger">{{ $message }}</div>
+          @enderror
           <br>
           <br>
 
@@ -66,11 +69,14 @@
           <br>
           <br>
 
-          <label for="deporte"><b>Categoria</b></label>
+          <label for="deporte"><b>Deporte</b></label>
           <select name="deporte">
             <option value="futbol" @selected($producto -> deporte == 'futbol') >Futbol</option>
             <option value="baloncesto" @selected($producto -> deporte == 'baloncesto') >Basketball</option>
-            <option value="voleibol" @selected($producto -> deporte == 'voleibol') > Volleyball</option>  
+            <option value="voleibol" @selected($producto -> deporte == 'voleibol') > Volleyball</option>
+            <option value="beisbol" @selected($producto -> deporte == 'beisbol') > Baseball</option>
+            <option value="box" @selected($producto -> deporte == 'box') > Box</option>
+            <option value="otro" @selected($producto -> deporte == 'otro') > Otro</option>  
           </select>
           <br>
           <br>
